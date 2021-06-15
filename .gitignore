@@ -13,3 +13,6 @@ npm-debug.log
 *.pem
 *.crt
 *.csr
+
+.odo/env
+.odo/odo-file-index.json
