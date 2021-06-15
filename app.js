@@ -6,7 +6,19 @@
 
 process.title = 'letschat';
 
-console.log(process.env);
+//console.log(process.env);
+
+const winston = require('winston');
+
+const logConfiguration = {
+    'transports': [
+        new winston.transports.Console()
+    ]
+};
+
+const logger = winston.createLogger(logConfiguration);
+
+logger.info('Lets-chat app is starting');
 
 require('colors');
 
@@ -56,6 +68,8 @@ if (settings.env === 'production') {
     app.enable('view cache');
 }
 console.log("MongoDB URL: "+settings.database.uri);
+logger.info("MongoDB URL: "+settings.database.uri);
+
 // Session
 var sessionStore = new MongoStore({
     url: settings.database.uri,
@@ -229,7 +243,8 @@ function startApp() {
     }
 
     var art = fs.readFileSync('./app/misc/art.txt', 'utf8');
-    console.log('\n' + art + '\n\n' + 'Release ' + psjon.version.yellow + '\n');
+    //console.log('\n' + art + '\n\n' + 'Release ' + psjon.version.yellow + '\n');
+    logger.info("Lets-chat started")
 }
 
 function checkForMongoTextSearch() {
